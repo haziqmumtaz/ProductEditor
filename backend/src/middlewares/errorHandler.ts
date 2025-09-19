@@ -6,7 +6,7 @@ export function errorHandler(): Middleware {
     try {
       await next();
       const response = await ctx.response.body;
-      if (response && "status" in response) {
+      if (response && typeof response === "object" && "status" in response) {
         ctx.status = response.status;
         ctx.body = { error: response.error };
       }
