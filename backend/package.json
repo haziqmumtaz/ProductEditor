@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "koa": "^3.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^14.0.0",
+    "zod": "^4.1.9"
+  },
+  "devDependencies": {
+    "@types/koa": "^3.0.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
+    "@types/node": "^24.5.2",
+    "tsx": "^4.6.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
