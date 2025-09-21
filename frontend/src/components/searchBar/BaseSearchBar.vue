@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 const emit = defineEmits(["search"]);
 const searchQuery = ref("");
-let debounceTimeout: number | undefined;
+let debounceTimeout: NodeJS.Timeout | undefined;
 
 watch(searchQuery, (val) => {
   if (debounceTimeout) clearTimeout(debounceTimeout);

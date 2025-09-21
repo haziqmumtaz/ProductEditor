@@ -1,7 +1,7 @@
-import { ProductRepositoryClass } from "../../repository/products-repository";
+import { IProductRepository } from "../../repository/products-repository";
 import { Product } from "../../types/core";
 
-export const createTestProductRepository = (): ProductRepositoryClass => {
+export const createTestProductRepository = (): IProductRepository => {
   const products: Product[] = [
     {
       id: 1,
@@ -105,7 +105,6 @@ export const createTestProductRepository = (): ProductRepositoryClass => {
 
     update: async (id, productData) => {
       const index = products.findIndex((p) => p.id === id);
-      if (index === -1) return undefined;
 
       products[index] = { ...products[index], ...productData };
       return products[index];
@@ -113,7 +112,6 @@ export const createTestProductRepository = (): ProductRepositoryClass => {
 
     delete: async (id) => {
       const index = products.findIndex((p) => p.id === id);
-      if (index === -1) return undefined;
 
       products.splice(index, 1);
       return { id };

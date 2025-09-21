@@ -3,7 +3,7 @@ import { PaginationParams } from "../types/http";
 import { readDataFromFile, writeDataToFile } from "../utils/file-database";
 import { generateId } from "../utils/generateId";
 
-export interface ProductRepositoryClass {
+export interface IProductRepository {
   getProductsCount(): number;
   getAll(): Product[];
   getProducts(
@@ -22,14 +22,11 @@ export interface ProductRepositoryClass {
   delete(id: number): Promise<Pick<Product, "id">>;
 }
 
-export class ProductRepository implements ProductRepositoryClass {
+export class ProductRepository implements IProductRepository {
   private products: Product[];
 
   constructor() {
-    this.products = readDataFromFile("products.json");
-    if (!this.products || !this.products.length) {
-      this.products = [];
-    }
+    this.products = readDataFromFile("products.json") ?? [];
   }
 
   getProductsCount() {
@@ -66,14 +63,6 @@ export class ProductRepository implements ProductRepositoryClass {
           .localeCompare(bValue.toLowerCase());
         return sortOrder === "asc" ? comparison : -comparison;
       }
-
-      return sortOrder === "asc"
-        ? String(aValue)
-            .toLowerCase()
-            .localeCompare(String(bValue).toLowerCase())
-        : String(bValue)
-            .toLowerCase()
-            .localeCompare(String(aValue).toLowerCase());
     });
 
     products = products.slice(offset, offset + limit);
@@ -88,7 +77,7 @@ export class ProductRepository implements ProductRepositoryClass {
   }
 
   async save(product) {
-    product = { id: generateId(), ...product };
+    product = { id: generateId(), ...product } as Product;
     this.products = [product, ...this.products];
     await writeDataToFile("products.json", this.products);
     return product;

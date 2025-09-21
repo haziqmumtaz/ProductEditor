@@ -1,22 +1,6 @@
 {
   "products": [
     {
-      "id": 2864,
-      "name": "Test 2",
-      "gvtId": 1,
-      "productTagline": "Test",
-      "shortDescription": "test",
-      "longDescription": "test",
-      "logoLocation": "oasidnasc ",
-      "productUrl": "test",
-      "voucherTypeName": "Test",
-      "orderUrl": "test",
-      "productTitle": "Test",
-      "variableDenomPriceMinAmount": 0.01,
-      "variableDenomPriceMaxAmount": 0.01,
-      "__typename": "ProductInfo"
-    },
-    {
       "id": 9729,
       "name": "test",
       "gvtId": 1,

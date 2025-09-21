@@ -1,30 +1,15 @@
-import { reactive, toRefs } from "vue";
+import { useBaseApi, type ApiComposable } from "../../../lib/useBaseApi";
 import { productsApi } from "./api";
 import type { Product } from "../types";
 
-export function useGetProductById() {
-  const state = reactive({
-    response: {} as Product,
-    loading: false,
-    error: "",
+export function useGetProductById(): ApiComposable<Product> {
+  const { response, loading, error, executeApiCall } = useBaseApi<Product>({
+    defaultErrorMessage: "Failed to load product",
   });
 
-  async function execute(id: number) {
-    state.loading = true;
-    state.error = "";
-    try {
-      const response = await productsApi.get(id);
-      state.response = response;
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        state.error = e.message;
-      } else {
-        state.error = "Failed to load product";
-      }
-    } finally {
-      state.loading = false;
-    }
+  async function execute(id: number): Promise<Product> {
+    return executeApiCall(() => productsApi.get(id));
   }
 
-  return { ...toRefs(state), execute };
+  return { response, loading, error, execute };
 }

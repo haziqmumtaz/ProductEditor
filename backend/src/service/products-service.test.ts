@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   ProductRepository,
-  ProductRepositoryClass,
+  IProductRepository,
 } from "../repository/products-repository";
 import { createTestProductRepository } from "../testing/repositories/products-repository";
 import { Product } from "../types/core";
@@ -9,7 +9,7 @@ import { ProductService } from "./products-service";
 
 describe("ProductService", () => {
   let service: ProductService;
-  let mockRepo: ProductRepositoryClass;
+  let mockRepo: IProductRepository;
 
   beforeEach(() => {
     mockRepo = createTestProductRepository();

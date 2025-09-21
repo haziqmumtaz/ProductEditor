@@ -3,7 +3,7 @@ import { ProductRepository } from "../repository/products-repository";
 import { Failure, HttpResult, Success } from "../types/http";
 import { PaginationParams, PaginatedResponse } from "../types/http";
 
-interface ProductServiceClass {
+interface IProductService {
   getAllProducts(): Product[];
   getProductsWithOptions(
     params: PaginationParams
@@ -16,7 +16,7 @@ interface ProductServiceClass {
   ): Promise<HttpResult<Pick<Product, "id">>>;
 }
 
-export class ProductService implements ProductServiceClass {
+export class ProductService implements IProductService {
   private productRepository: ProductRepository;
 
   constructor(productRepository?: ProductRepository) {

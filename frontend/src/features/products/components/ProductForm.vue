@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import {
   createProductSchema,
   updateProductSchema,
-} from "../schemas/productSchema";
+} from "../api/schemas/productSchema";
 import type { Product } from "../types";
 
 interface Props {
@@ -27,7 +27,7 @@ const emit = defineEmits<{
 // Form state
 const errors = ref<Record<string, string>>({});
 const touched = ref<Record<string, boolean>>({});
-let debounceTimeout: number | undefined;
+let debounceTimeout: NodeJS.Timeout | undefined;
 
 // Form data
 const form = ref<Product | Omit<Product, "id">>({ ...props.product });

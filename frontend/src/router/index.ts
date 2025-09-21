@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import ProductsList from "../features/products/pages/ProductsList.vue";
 import ProductDetails from "../features/products/pages/ProductDetails.vue";
 import CreateProduct from "../features/products/pages/CreateProduct.vue";
+import NotFound from "../components/layout/NotFound.vue";
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     meta: {
       title: "Create Product",
     },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 

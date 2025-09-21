@@ -54,7 +54,7 @@ function handleCancel() {
   <div class="min-h-screen bg-gray-50 w-[80vw]">
     <div class="bg-white shadow-sm border-b">
       <div class="max-w-6xl mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-end">
           <div class="flex gap-2">
             <BaseButton @click="handleCancel" variant="basic" size="md">
               Cancel

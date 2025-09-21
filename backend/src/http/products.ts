@@ -4,7 +4,6 @@ import { ProductService } from "../service/products-service";
 import { postProductSchema, putProductSchema } from "./schemas/products-schema";
 import { paginationParamsSchema, idParamSchema } from "../types/http";
 
-// Create service instance inside functions to allow for proper mocking
 const getProductService = () => new ProductService();
 
 async function listProducts(ctx: Context) {

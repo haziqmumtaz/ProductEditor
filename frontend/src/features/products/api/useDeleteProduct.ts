@@ -1,26 +1,17 @@
-import { reactive, toRefs } from "vue";
+import { useBaseApi, type ApiComposable } from "../../../lib/useBaseApi";
 import { productsApi } from "./api";
+import type { Product } from "../types";
 
-export function useDeleteProduct() {
-  const state = reactive({
-    response: null,
-    loading: false,
-    error: "",
+export function useDeleteProduct(): ApiComposable<Pick<Product, "id">> {
+  const { response, loading, error, executeApiCall } = useBaseApi<
+    Pick<Product, "id">
+  >({
+    defaultErrorMessage: "Failed to delete product",
   });
 
-  async function execute(id: number) {
-    state.loading = true;
-    state.error = "";
-    try {
-      const response = await productsApi.delete(id);
-      state.response = response as unknown as null;
-    } catch (error) {
-      state.error =
-        error instanceof Error ? error.message : "Failed to delete product";
-    } finally {
-      state.loading = false;
-    }
+  async function execute(id: number): Promise<Pick<Product, "id">> {
+    return executeApiCall(() => productsApi.delete(id));
   }
 
-  return { ...toRefs(state), execute };
+  return { response, loading, error, execute };
 }

@@ -1,27 +1,15 @@
-import { reactive, toRefs } from "vue";
+import { useBaseApi, type ApiComposable } from "../../../lib/useBaseApi";
 import { productsApi } from "./api";
 import type { Product } from "../types";
 
-export function usePatchProduct() {
-  const state = reactive({
-    response: {} as Product,
-    loading: false,
-    error: "",
+export function usePatchProduct(): ApiComposable<Product> {
+  const { response, loading, error, executeApiCall } = useBaseApi<Product>({
+    defaultErrorMessage: "Failed to patch product",
   });
 
-  async function execute(id: number, product: Product) {
-    state.loading = true;
-    state.error = "";
-    try {
-      const response = await productsApi.patch(id, product);
-      state.response = response;
-    } catch (error) {
-      state.error =
-        error instanceof Error ? error.message : "Failed to patch product";
-    } finally {
-      state.loading = false;
-    }
+  async function execute(id: number, product: Product): Promise<Product> {
+    return executeApiCall(() => productsApi.patch(id, product));
   }
 
-  return { ...toRefs(state), execute };
+  return { response, loading, error, execute };
 }

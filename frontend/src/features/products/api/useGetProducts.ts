@@ -1,4 +1,4 @@
-import { reactive, toRefs } from "vue";
+import { useBaseApi, type ApiComposable } from "../../../lib/useBaseApi";
 import { productsApi, type PaginatedResponse } from "./api";
 import type { Product } from "../types";
 
@@ -10,14 +10,16 @@ export interface ProductsQueryParams {
   sortOrder?: string;
 }
 
-export function useGetProducts() {
-  const state = reactive({
-    response: {} as PaginatedResponse<Product>,
-    loading: false,
-    error: "",
+export function useGetProducts(): ApiComposable<PaginatedResponse<Product>> {
+  const { response, loading, error, executeApiCall } = useBaseApi<
+    PaginatedResponse<Product>
+  >({
+    defaultErrorMessage: "Failed to load products",
   });
 
-  async function execute(params: ProductsQueryParams = {}) {
+  async function execute(
+    params: ProductsQueryParams = {}
+  ): Promise<PaginatedResponse<Product>> {
     const {
       query = "",
       page = 1,
@@ -26,30 +28,10 @@ export function useGetProducts() {
       sortOrder = "asc",
     } = params;
 
-    state.loading = true;
-    state.error = "";
-    try {
-      // Add a delay to simulate slower API response
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      const response = await productsApi.listWithOptions(
-        page,
-        limit,
-        sortBy,
-        sortOrder,
-        query
-      );
-      state.response = response;
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        state.error = e.message;
-      } else {
-        state.error = "Failed to load products";
-      }
-    } finally {
-      state.loading = false;
-    }
+    return executeApiCall(() =>
+      productsApi.listWithOptions(page, limit, sortBy, sortOrder, query)
+    );
   }
 
-  return { ...toRefs(state), execute };
+  return { response, loading, error, execute };
 }

@@ -32,5 +32,6 @@ export const productsApi = {
     apiHttpClient.patch<Product, Product>(`/api/products/${id}`, product),
   create: (product: Product) =>
     apiHttpClient.post<Product, Product>("/api/products", product),
-  delete: (id: number) => apiHttpClient.delete<void>(`/api/products/${id}`),
+  delete: (id: number) =>
+    apiHttpClient.delete<Pick<Product, "id">>(`/api/products/${id}`),
 };
