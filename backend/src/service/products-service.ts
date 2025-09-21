@@ -4,8 +4,8 @@ import { Failure, HttpResult, Success } from "../types/http";
 import { PaginationParams, PaginatedResponse } from "../types/http";
 
 interface ProductServiceClass {
-  getProducts(): Product[];
-  getPaginatedProducts(
+  getAllProducts(): Product[];
+  getProductsWithOptions(
     params: PaginationParams
   ): HttpResult<PaginatedResponse<Product>>;
   getProductById(id: number): HttpResult<Product>;
@@ -17,15 +17,18 @@ interface ProductServiceClass {
 }
 
 export class ProductService implements ProductServiceClass {
-  productRepository = new ProductRepository();
+  private productRepository: ProductRepository;
 
-  getProducts(): Product[] {
-    return this.productRepository.getAll();
+  constructor(productRepository?: ProductRepository) {
+    this.productRepository = productRepository ?? new ProductRepository();
   }
 
-  getPaginatedProducts(params) {
-    const page = params.page || 1;
-    const limit = params.limit || 10;
+  getAllProducts(): Product[] {
+    return Success(this.productRepository.getAll());
+  }
+
+  getProductsWithOptions(params) {
+    const { sortBy, sortOrder, search, page, limit } = params;
     const offset = (page - 1) * limit;
 
     if (offset >= this.productRepository.getProductsCount()) {
@@ -40,7 +43,10 @@ export class ProductService implements ProductServiceClass {
       };
     }
 
-    const { products, total } = this.productRepository.getAllPaginated(
+    const { products, total } = this.productRepository.getProducts(
+      sortBy,
+      sortOrder,
+      search,
       page,
       limit
     );

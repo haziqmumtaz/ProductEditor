@@ -19,7 +19,6 @@ export function errorHandler(): Middleware {
         };
       } else {
         ctx.status = 500;
-        console.log(error);
         ctx.body = { error: "Internal server error" };
       }
     }

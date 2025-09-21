@@ -2,52 +2,47 @@ import { Context } from "koa";
 import Router from "koa-router";
 import { ProductService } from "../service/products-service";
 import { postProductSchema, putProductSchema } from "./schemas/products-schema";
-import { paginationParamsSchema } from "../types/http";
+import { paginationParamsSchema, idParamSchema } from "../types/http";
 
-const productService = new ProductService();
+// Create service instance inside functions to allow for proper mocking
+const getProductService = () => new ProductService();
 
 async function listProducts(ctx: Context) {
-  const params = paginationParamsSchema.parse({
-    page: ctx.query.page ? parseInt(ctx.query.page as string) : undefined,
-    limit: ctx.query.limit ? parseInt(ctx.query.limit as string) : undefined,
-  });
-
-  const result = productService.getPaginatedProducts(params);
+  const params = paginationParamsSchema.parse(ctx.query);
+  const result = getProductService().getProductsWithOptions(params);
   ctx.response.body = result;
 }
 
 async function getProductById(ctx: Context) {
-  ctx.response.body = productService.getProductById(parseInt(ctx.params.id));
+  const id = idParamSchema.parse(ctx.params.id);
+  ctx.response.body = getProductService().getProductById(id);
 }
 
 async function createProduct(ctx: Context) {
   const payload = await postProductSchema.parseAsync(ctx.request.body);
-  const newProduct = await productService.createProduct(payload);
+  const newProduct = await getProductService().createProduct(payload);
   ctx.response.body = newProduct;
 }
 
 async function updateProduct(ctx: Context) {
   const payload = await putProductSchema.parseAsync(ctx.request.body);
-  const updatedProduct = await productService.updateProduct(
-    ctx.params.id,
-    payload
-  );
+  const id = idParamSchema.parse(ctx.params.id);
+  const updatedProduct = await getProductService().updateProduct(id, payload);
   ctx.response.body = updatedProduct;
 }
 
 async function deleteProduct(ctx: Context) {
-  const deletedProduct = await productService.deleteProduct(
-    parseInt(ctx.params.id)
-  );
+  const id = idParamSchema.parse(ctx.params.id);
+  const deletedProduct = await getProductService().deleteProduct(id);
   ctx.response.body = deletedProduct;
 }
 
-const router = new Router({ prefix: "/api/products" });
+const productsRouter = new Router({ prefix: "/api/products" });
 
-router.get("/", listProducts);
-router.get("/:id", getProductById);
-router.post("/", createProduct);
-router.patch("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+productsRouter.get("/", listProducts);
+productsRouter.get("/:id", getProductById);
+productsRouter.post("/", createProduct);
+productsRouter.patch("/:id", updateProduct);
+productsRouter.delete("/:id", deleteProduct);
 
-export default router;
+export default productsRouter;

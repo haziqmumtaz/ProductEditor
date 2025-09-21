@@ -8,7 +8,7 @@ export const putProductSchema = z
     productTagline: z.string(),
     shortDescription: z.string(),
     longDescription: z.string(),
-    logoLocation: z.string(),
+    logoLocation: z.string().url(),
     productUrl: z.string(),
     voucherTypeName: z.string(),
     orderUrl: z.string(),
@@ -21,8 +21,7 @@ export const putProductSchema = z
     (data) =>
       data.variableDenomPriceMinAmount == null ||
       data.variableDenomPriceMaxAmount == null ||
-      parseFloat(data.variableDenomPriceMinAmount) <=
-        parseFloat(data.variableDenomPriceMaxAmount),
+      data.variableDenomPriceMinAmount <= data.variableDenomPriceMaxAmount,
     {
       message: "Min amount must be <= max amount",
       path: ["variableDenomPriceMinAmount"],

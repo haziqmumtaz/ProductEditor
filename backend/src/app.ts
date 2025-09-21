@@ -1,6 +1,7 @@
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
-import router from "./http/products";
+import productsRouter from "./http/products";
+import cors from "@koa/cors";
 import { requestLogger } from "./middlewares/logging";
 import { errorHandler } from "./middlewares/errorHandler";
 
@@ -9,6 +10,7 @@ const app = new Koa();
 app.use(requestLogger());
 app.use(errorHandler());
 app.use(bodyParser());
+app.use(cors());
 
 app.use(async (ctx, next) => {
   if (ctx.method === "GET" && ctx.path === `/api/health`) {
@@ -22,7 +24,7 @@ app.use(async (ctx, next) => {
   await next();
 });
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(productsRouter.routes());
+app.use(productsRouter.allowedMethods());
 
 export default app;
