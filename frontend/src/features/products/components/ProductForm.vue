@@ -83,7 +83,6 @@ function validateField(field: string) {
     <div class="group">
       <label>
         Logo Location
-        <span class="text-red-500">*</span>
       </label>
       <input
         label="Logo Location"
