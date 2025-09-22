@@ -1,8 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { usePatchProduct } from "./usePatchProduct";
-import { productsApi } from "./api";
-import type { Product } from "../types";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockSingleProduct, mockUpdatedProduct } from "../testing/mock";
+import { productsApi } from "./api";
+import { usePatchProduct } from "./usePatchProduct";
 
 vi.mock("./api", () => ({
   productsApi: {

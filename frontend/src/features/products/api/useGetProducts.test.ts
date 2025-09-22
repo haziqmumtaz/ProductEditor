@@ -1,11 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { useGetProducts } from "./useGetProducts";
-import { productsApi } from "./api";
-import type { Product } from "../types";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   mockPaginatedResponse,
   mockPaginatedResponsePage2,
 } from "../testing/mock";
+import { productsApi } from "./api";
+import { useGetProducts } from "./useGetProducts";
 
 vi.mock("./api", () => ({
   productsApi: {

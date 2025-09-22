@@ -132,16 +132,6 @@ function setupIntersectionObserver() {
   observer.observe(loadMoreTrigger.value);
 }
 
-function handleSortByChange(value: string) {
-  sortBy.value = value;
-  loadProducts(true);
-}
-
-function handleSortOrderChange(value: string) {
-  sortOrder.value = value;
-  loadProducts(true);
-}
-
 onMounted(() => {
   loadProducts(true);
 });
@@ -169,11 +159,7 @@ watch(loadMoreTrigger, (newTrigger) => {
       <div class="flex items-center gap-4">
         <div class="flex items-center gap-2">
           <label class="text-sm font-medium text-gray-700">Sort by:</label>
-          <select
-            v-model="sortBy"
-            @change="loadProducts(true)"
-            class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
+          <select v-model="sortBy" @change="loadProducts(true)">
             <option value="id">ID</option>
             <option value="gvtId">GvtID</option>
             <option value="name">Name</option>
@@ -182,11 +168,7 @@ watch(loadMoreTrigger, (newTrigger) => {
 
         <div class="flex items-center gap-2">
           <label class="text-sm font-medium text-gray-700">Order:</label>
-          <select
-            v-model="sortOrder"
-            @change="loadProducts(true)"
-            class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
+          <select v-model="sortOrder" @change="loadProducts(true)">
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>

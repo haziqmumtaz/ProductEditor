@@ -1,19 +1,20 @@
 import { mount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory } from "vue-router";
+import { ref } from "vue";
+import { mockPaginatedResponse } from "../testing/mock";
 import ProductsList from "./ProductsList.vue";
-import { mockProducts, mockPaginatedResponse } from "../testing/mock";
 
 // Mock the API composables
 const mockGetProductsExecute = vi.fn();
-const mockGetProductsResponse = vi.fn(() => ({ value: null as any }));
-const mockGetProductsLoading = vi.fn(() => ({ value: false }));
-const mockGetProductsError = vi.fn(() => ({ value: "" }));
+const mockGetProductsResponse = vi.fn(() => ref(null as any));
+const mockGetProductsLoading = vi.fn(() => ref(false));
+const mockGetProductsError = vi.fn(() => ref(""));
 
 const mockDeleteProductExecute = vi.fn();
-const mockDeleteProductResponse = vi.fn(() => ({ value: null as any }));
-const mockDeleteProductLoading = vi.fn(() => ({ value: false }));
-const mockDeleteProductError = vi.fn(() => ({ value: "" }));
+const mockDeleteProductResponse = vi.fn(() => ref(null as any));
+const mockDeleteProductLoading = vi.fn(() => ref(false));
+const mockDeleteProductError = vi.fn(() => ref(""));
 
 vi.mock("../api/useGetProducts", () => ({
   useGetProducts: vi.fn(() => ({
@@ -110,16 +111,13 @@ describe("ProductsList", () => {
     mockPush.mockClear();
     mockGetProductsExecute.mockClear();
     mockDeleteProductExecute.mockClear();
-    mockGetProductsResponse.mockReturnValue({ value: mockPaginatedResponse });
-    mockGetProductsLoading.mockReturnValue({ value: false });
-    mockGetProductsError.mockReturnValue({ value: "" });
-    mockDeleteProductResponse.mockReturnValue({ value: null as any });
-    mockDeleteProductLoading.mockReturnValue({ value: false });
-    mockDeleteProductError.mockReturnValue({ value: "" });
+    mockGetProductsResponse.mockReturnValue(ref(mockPaginatedResponse));
+    mockGetProductsLoading.mockReturnValue(ref(false));
+    mockGetProductsError.mockReturnValue(ref(""));
+    mockDeleteProductResponse.mockReturnValue(ref(null as any));
+    mockDeleteProductLoading.mockReturnValue(ref(false));
+    mockDeleteProductError.mockReturnValue(ref(""));
     vi.clearAllMocks();
-
-    // Ensure the mock response is set up correctly
-    mockGetProductsResponse.mockReturnValue({ value: mockPaginatedResponse });
   });
 
   it("renders page structure with header and controls", async () => {

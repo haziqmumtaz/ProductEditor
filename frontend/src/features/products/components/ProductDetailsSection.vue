@@ -72,6 +72,12 @@ defineProps<Props>();
             }}
           </div>
         </div>
+        <div class="group">
+          <label> __typename </label>
+          <div class="text-gray-900">
+            {{ product.__typename }}
+          </div>
+        </div>
       </div>
     </div>
 

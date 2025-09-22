@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { mockProducts, mockSingleProduct } from "../testing/mock";
+import { mockSingleProduct } from "../testing/mock";
 import ProductCard from "./ProductCard.vue";
 
 // Mock the icons

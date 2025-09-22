@@ -1,5 +1,4 @@
 import { Product } from "../types/core";
-import { PaginationParams } from "../types/http";
 import { readDataFromFile, writeDataToFile } from "../utils/file-database";
 import { generateId } from "../utils/generateId";
 

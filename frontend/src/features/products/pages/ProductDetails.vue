@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch, nextTick } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import BaseButton from "../../../components/buttons/BaseButton.vue";
 import { useGetProductById } from "../api/useGetProductById";
 import { usePatchProduct } from "../api/usePatchProduct";
-import ProductForm from "../components/ProductForm.vue";
 import ProductDetailsSection from "../components/ProductDetailsSection.vue";
+import ProductForm from "../components/ProductForm.vue";
 import type { Product } from "../types";
-import BaseButton from "../../../components/buttons/BaseButton.vue";
 
 const route = useRoute();
 const router = useRouter();

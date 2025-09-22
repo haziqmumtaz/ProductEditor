@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import BaseButton from "../../../components/buttons/BaseButton.vue";
 import { usePostProduct } from "../api/usePostProduct";
 import ProductForm from "../components/ProductForm.vue";
 import type { Product } from "../types";
-import BaseButton from "../../../components/buttons/BaseButton.vue";
 
 const router = useRouter();
 

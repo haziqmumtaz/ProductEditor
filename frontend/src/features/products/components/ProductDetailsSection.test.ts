@@ -1,8 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { mockSingleProduct } from "../testing/mock";
 import ProductDetailsSection from "./ProductDetailsSection.vue";
-import type { Product } from "../types";
-import { mockSingleProduct, mockProducts } from "../testing/mock";
 
 describe("ProductDetailsSection", () => {
   beforeEach(() => {

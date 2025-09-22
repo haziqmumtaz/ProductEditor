@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
+import { beforeEach, describe, expect, it } from "vitest";
 import BaseButton from "./BaseButton.vue";
 
 describe("BaseButton", () => {

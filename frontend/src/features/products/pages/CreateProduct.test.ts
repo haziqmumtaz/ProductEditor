@@ -1,13 +1,14 @@
 import { mount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory } from "vue-router";
+import { ref } from "vue";
 import CreateProduct from "./CreateProduct.vue";
 
 // Mock the composables
 const mockExecute = vi.fn();
-const mockResponse = vi.fn(() => ({ value: null }));
-const mockLoading = vi.fn(() => ({ value: false }));
-const mockError = vi.fn(() => ({ value: "" }));
+const mockResponse = vi.fn(() => ref(null));
+const mockLoading = vi.fn(() => ref(false));
+const mockError = vi.fn(() => ref(""));
 
 vi.mock("../api/usePostProduct", () => ({
   usePostProduct: vi.fn(() => ({
@@ -61,9 +62,9 @@ describe("CreateProduct", () => {
     document.body.innerHTML = "";
     mockPush.mockClear();
     mockExecute.mockClear();
-    mockResponse.mockReturnValue({ value: null });
-    mockLoading.mockReturnValue({ value: false });
-    mockError.mockReturnValue({ value: "" });
+    mockResponse.mockReturnValue(ref(null));
+    mockLoading.mockReturnValue(ref(false));
+    mockError.mockReturnValue(ref(""));
     vi.clearAllMocks();
   });
 

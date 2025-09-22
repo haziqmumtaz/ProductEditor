@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import Router from "koa-router";
+import Router from "@koa/router";
 import { ProductService } from "../service/products-service";
 import { postProductSchema, putProductSchema } from "./schemas/products-schema";
 import { paginationParamsSchema, idParamSchema } from "../http/schemas/core";

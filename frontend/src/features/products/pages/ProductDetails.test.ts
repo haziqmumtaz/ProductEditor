@@ -1,19 +1,20 @@
 import { mount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory } from "vue-router";
+import { ref } from "vue";
 import { mockSingleProduct } from "../testing/mock";
 import ProductDetails from "./ProductDetails.vue";
 
 // Mock the API composables
 const mockGetProductExecute = vi.fn();
-const mockGetProductResponse = vi.fn(() => ({ value: null as any }));
-const mockGetProductLoading = vi.fn(() => ({ value: false }));
-const mockGetProductError = vi.fn(() => ({ value: "" }));
+const mockGetProductResponse = vi.fn(() => ref(null as any));
+const mockGetProductLoading = vi.fn(() => ref(false));
+const mockGetProductError = vi.fn(() => ref(""));
 
 const mockPatchProductExecute = vi.fn();
-const mockPatchProductResponse = vi.fn(() => ({ value: null as any }));
-const mockPatchProductLoading = vi.fn(() => ({ value: false }));
-const mockPatchProductError = vi.fn(() => ({ value: "" }));
+const mockPatchProductResponse = vi.fn(() => ref(null as any));
+const mockPatchProductLoading = vi.fn(() => ref(false));
+const mockPatchProductError = vi.fn(() => ref(""));
 
 vi.mock("../api/useGetProductById", () => ({
   useGetProductById: vi.fn(() => ({
@@ -91,12 +92,12 @@ describe("ProductDetails", () => {
     mockPush.mockClear();
     mockGetProductExecute.mockClear();
     mockPatchProductExecute.mockClear();
-    mockGetProductResponse.mockReturnValue({ value: mockSingleProduct });
-    mockGetProductLoading.mockReturnValue({ value: false });
-    mockGetProductError.mockReturnValue({ value: "" });
-    mockPatchProductResponse.mockReturnValue({ value: mockSingleProduct });
-    mockPatchProductLoading.mockReturnValue({ value: false });
-    mockPatchProductError.mockReturnValue({ value: "" });
+    mockGetProductResponse.mockReturnValue(ref(mockSingleProduct));
+    mockGetProductLoading.mockReturnValue(ref(false));
+    mockGetProductError.mockReturnValue(ref(""));
+    mockPatchProductResponse.mockReturnValue(ref(mockSingleProduct));
+    mockPatchProductLoading.mockReturnValue(ref(false));
+    mockPatchProductError.mockReturnValue(ref(""));
     vi.clearAllMocks();
   });
 
@@ -115,7 +116,7 @@ describe("ProductDetails", () => {
     });
 
     it("shows loading state when product is being fetched", async () => {
-      mockGetProductLoading.mockReturnValue({ value: true });
+      mockGetProductLoading.mockReturnValue(ref(true));
 
       await router.push("/");
       await router.isReady();
@@ -255,7 +256,7 @@ describe("ProductDetails", () => {
     });
 
     it("shows loading state on save button when patching", async () => {
-      mockPatchProductLoading.mockReturnValue({ value: true });
+      mockPatchProductLoading.mockReturnValue(ref(true));
 
       await router.push("/");
       await router.isReady();
@@ -276,9 +277,7 @@ describe("ProductDetails", () => {
     });
 
     it("shows error message when patching fails", async () => {
-      mockPatchProductError.mockReturnValue({
-        value: "Failed to update product",
-      });
+      mockPatchProductError.mockReturnValue(ref("Failed to update product"));
 
       await router.push("/");
       await router.isReady();

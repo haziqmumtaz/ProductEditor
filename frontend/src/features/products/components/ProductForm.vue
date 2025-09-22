@@ -260,7 +260,7 @@ function validateField(field: string) {
         </div>
 
         <div class="group">
-          <label class="block font-medium text-gray-700 mb-2">
+          <label >
             Denom Price Min Amount
           </label>
           <input
@@ -288,7 +288,7 @@ function validateField(field: string) {
         </div>
 
         <div class="group">
-          <label class="block font-medium text-gray-700 mb-2">
+          <label  >
             Denom Price Max Amount
           </label>
           <input
@@ -304,6 +304,8 @@ function validateField(field: string) {
             @blur="validateField('variableDenomPriceMaxAmount')"
             @input="validateField('variableDenomPriceMaxAmount')"
           />
+        </div>
+        <div class="group">
           <div
             v-if="
               errors.variableDenomPriceMaxAmount &&
@@ -313,6 +315,19 @@ function validateField(field: string) {
           >
             {{ errors.variableDenomPriceMaxAmount }}
           </div>
+        </div>
+        <div class="group">
+          <label class="pb-4"> __typename </label>
+          <select v-model="form.__typename">
+            <option value="ProductInfo">ProductInfo</option>
+          </select>
+          <div
+            v-if="errors.__typename && touched.__typename"
+            class="text-danger"
+          >
+            {{ errors.__typename }}
+          </div>
+        </input>
         </div>
       </div>
     </div>
