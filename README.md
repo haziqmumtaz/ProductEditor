@@ -210,8 +210,23 @@ The application provides a modern, responsive interface with:
 ### Product List
 
 ![Products List](./ss_products_listing.png)
+
+### Product List Filters
+
 ![Products List filters](./ss_products_listing_filters.png)
+
+### Product Details
+
 ![Product Details](./ss_product_details.png)
+
+### Edit Product Details
+
 ![Product Editing](./ss_product_editing.png)
+
+### Create Product
+
 ![Create Product Form](./ss_create_product_res.png)
+
+### Create Product Result
+
 ![Create Product Result](./ss_create_product_res.png)
