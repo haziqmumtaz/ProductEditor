@@ -97,16 +97,32 @@ PORT=3001
 
 ### Installation and Running the application
 
-1.**Install all dependencies**
+**Install all dependencies**
 
 ```bash
 npm run install:all
 ```
 
-2. **Start development servers**
+**Start development servers**
 
 ```bash
 npm run dev
+```
+
+OR
+
+**Start Production Server**
+
+**Build**
+
+```bash
+npm run build
+```
+
+**Start**
+
+```bash
+npm run start
 ```
 
 This will start:
