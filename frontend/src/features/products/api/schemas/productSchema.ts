@@ -23,7 +23,13 @@ export const productSchema = z
       ),
     productUrl: z.string().min(1, "Product URL must be present"),
     voucherTypeName: z.string().min(1, "Voucher type name must be present"),
-    orderUrl: z.url().min(1, "Order URL must be present"),
+    orderUrl: z
+      .url()
+      .min(1, "Order URL must be present")
+      .refine(
+        (val) => !val || z.url().safeParse(val).success,
+        "Must be a valid URL i.e https://example.com"
+      ),
     productTitle: z.string().min(1, "Product title must be present"),
     variableDenomPriceMinAmount: z.string().optional(),
     variableDenomPriceMaxAmount: z.string().optional(),

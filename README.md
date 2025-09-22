@@ -195,7 +195,7 @@ curl -X POST http://localhost:3001/api/products \
 
 The application provides a modern, responsive interface with:
 
-- **Product Grid**: Visual cards displaying all products
+- **Product List**: Visual cards displaying all products
   - **Infinite Scroll**: Automatically loads more products as you scroll down
   - **Real-time Search**: Live search functionality that filters products by name as you type
   - **Advanced Sorting**: Sort products by ID, name, or gvtId in ascending or descending order
@@ -204,3 +204,14 @@ The application provides a modern, responsive interface with:
 - **Validation**: Real-time form validation with helpful error messages
 - **Loading States**: Proper loading indicators and error handling
 - **Responsive Design**: Works seamlessly on desktop and mobile
+
+## Screenshots
+
+### Product List
+
+![Products List](./ss_products_listing.png)
+![Products List filters](./ss_products_listing_filters.png)
+![Product Details](./ss_product_details.png)
+![Product Editing](./ss_product_editing.png)
+![Create Product Form](./ss_create_product_res.png)
+![Create Product Result](./ss_create_product_res.png)
