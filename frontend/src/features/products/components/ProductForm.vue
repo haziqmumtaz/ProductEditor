@@ -317,7 +317,7 @@ function validateField(field: string) {
           </div>
         </div>
         <div class="group">
-          <label class="pb-4"> __typename </label>
+          <label class="pb-4"> Type of Product </label>
           <select v-model="form.__typename">
             <option value="ProductInfo">ProductInfo</option>
           </select>

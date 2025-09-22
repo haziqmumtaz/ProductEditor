@@ -40,10 +40,8 @@ export class ProductRepository implements IProductRepository {
     const offset = (page - 1) * limit;
     let products = this.products;
     if (search) {
-      products = products.filter(
-        (p) =>
-          p.name.toLowerCase().includes(search.toLowerCase()) ||
-          p.productTitle.toLowerCase().includes(search.toLowerCase())
+      products = products.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
       );
     }
 

@@ -14,7 +14,7 @@ export const productSchema = z
       .string()
       .min(1, "Long description must be present")
       .max(3000, "Long description must be less than 3000 characters"),
-    logoLocation: z.url().min(1, "Logo location must be present"),
+    logoLocation: z.url().optional(),
     productUrl: z.string().min(1, "Product URL must be present"),
     voucherTypeName: z.string().min(1, "Voucher type name must be present"),
     orderUrl: z.url().min(1, "Order URL must be present"),

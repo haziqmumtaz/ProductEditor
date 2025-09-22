@@ -1,11 +1,13 @@
 ## Project Overview
 
-The **Coda Product Editor** is a web application designed to manage products as per Coda Take Home task guidlines. It provides a complete CRUD interface for product management with validation, search, pagination, and sorting functionalities, and responsive design.
+The **Coda Product Editor** is a web application designed to manage products as per Coda Take Home task guidlines. It provides a complete CRUD interface for product management with validation, search, pagination (with infinite scroll), and sorting functionalities, and responsive design.
+
+You can access Quick Preview on: https://codaproducteditorfrontend-production.up.railway.app/
 
 ### Key Features
 
 - **Product Management**: Complete CRUD operations for products
-- **Advanced Filtering**: Search functionality across Name and Title fields, sorting on ID name and gvtId by both asc and descending, and paginated request handling for product listing
+- **Advanced Filtering**: Search functionality across Name and Title fields, sorting on ID, name, and gvtId by both asc and descending, and paginated request handling for product listing
 - **Form Validation**: Comprehensive client-side and server-side validation using Zod
 - **Responsive Design**: Modern UI built with Vue.js and Tailwind CSS
 - **Modern UX**: Clean, intuitive, and consistent interface with proper loading states and error handling
@@ -109,6 +111,11 @@ npm run install:all
 npm run dev
 ```
 
+This will start:
+
+- Backend API server on `http://localhost:3001`
+- Frontend development server on `http://localhost:5173`
+
 OR
 
 **Start Production Server**
@@ -128,7 +135,7 @@ npm run start
 This will start:
 
 - Backend API server on `http://localhost:3001`
-- Frontend development server on `http://localhost:5173`
+- Frontend development server on `http://localhost:4173`
 
 ## Development
 
@@ -189,6 +196,9 @@ curl -X POST http://localhost:3001/api/products \
 The application provides a modern, responsive interface with:
 
 - **Product Grid**: Visual cards displaying all products
+  - **Infinite Scroll**: Automatically loads more products as you scroll down
+  - **Real-time Search**: Live search functionality that filters products by name as you type
+  - **Advanced Sorting**: Sort products by ID, name, or gvtId in ascending or descending order
 - **Product Details**: Comprehensive product information page
 - **Form Editor**: Full-featured form for creating/editing products
 - **Validation**: Real-time form validation with helpful error messages

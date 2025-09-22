@@ -8,7 +8,7 @@ export const putProductSchema = z
     productTagline: z.string(),
     shortDescription: z.string(),
     longDescription: z.string(),
-    logoLocation: z.string().url(),
+    logoLocation: z.string().optional(),
     productUrl: z.string(),
     voucherTypeName: z.string(),
     orderUrl: z.url(),
