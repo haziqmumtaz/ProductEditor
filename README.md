@@ -225,7 +225,7 @@ The application provides a modern, responsive interface with:
 
 ### Create Product
 
-![Create Product Form](./ss_create_product_res.png)
+![Create Product Form](./ss_create_product.png)
 
 ### Create Product Result
 
