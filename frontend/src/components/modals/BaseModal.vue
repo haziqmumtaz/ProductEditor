@@ -71,12 +71,10 @@ const sizeClasses = {
           leave-to-class="opacity-0 scale-95"
         >
           <div
-            v-if="isOpen"
             :class="['w-full bg-white rounded-lg shadow-xl', sizeClasses[size as keyof typeof sizeClasses]]"
             @click.stop
           >
             <div
-              v-if="title || $slots.header"
               class="flex items-center justify-between p-6 border-b border-gray-200"
             >
               <h3 v-if="title" class="text-lg font-semibold text-gray-900">

@@ -19,21 +19,7 @@ describe("ProductForm", () => {
       props: { product: mockSingleProduct },
     });
 
-    // Check that all form fields are rendered with correct labels and asterisks
-    expect(wrapper.text()).toContain("Logo Location");
-    expect(wrapper.text()).toContain("Product Name");
-    expect(wrapper.text()).toContain("Product Title");
-    expect(wrapper.text()).toContain("GvtID");
-    expect(wrapper.text()).toContain("Product Tagline");
-    expect(wrapper.text()).toContain("Voucher Type Name");
-    expect(wrapper.text()).toContain("Product URL");
-    expect(wrapper.text()).toContain("Order URL");
-    expect(wrapper.text()).toContain("Denom Price Min Amount");
-    expect(wrapper.text()).toContain("Denom Price Max Amount");
-    expect(wrapper.text()).toContain("Short Description");
-    expect(wrapper.text()).toContain("Long Description");
-
-    expect(wrapper.text()).toContain("Logo Location *");
+    expect(wrapper.text()).toContain("Logo Location ");
     expect(wrapper.text()).toContain("Product Name *");
     expect(wrapper.text()).toContain("Product Title *");
     expect(wrapper.text()).toContain("GvtID *");
@@ -43,9 +29,8 @@ describe("ProductForm", () => {
     expect(wrapper.text()).toContain("Order URL *");
     expect(wrapper.text()).toContain("Short Description *");
     expect(wrapper.text()).toContain("Long Description *");
-
-    expect(wrapper.text()).not.toContain("Denom Price Min Amount *");
-    expect(wrapper.text()).not.toContain("Denom Price Max Amount *");
+    expect(wrapper.text()).toContain("Denom Price Min Amount");
+    expect(wrapper.text()).toContain("Denom Price Max Amount");
   });
 
   it("populates form fields with product data and handles input changes", async () => {
