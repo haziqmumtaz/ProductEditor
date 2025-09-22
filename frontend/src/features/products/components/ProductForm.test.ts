@@ -20,7 +20,7 @@ describe("ProductForm", () => {
       props: { product: mockSingleProduct },
     });
 
-    // Check that all form fields are rendered with correct labels
+    // Check that all form fields are rendered with correct labels and asterisks
     expect(wrapper.text()).toContain("Logo Location");
     expect(wrapper.text()).toContain("Product Name");
     expect(wrapper.text()).toContain("Product Title");
@@ -34,7 +34,6 @@ describe("ProductForm", () => {
     expect(wrapper.text()).toContain("Short Description");
     expect(wrapper.text()).toContain("Long Description");
 
-    // Check that required fields have asterisks
     expect(wrapper.text()).toContain("Logo Location *");
     expect(wrapper.text()).toContain("Product Name *");
     expect(wrapper.text()).toContain("Product Title *");
@@ -46,7 +45,6 @@ describe("ProductForm", () => {
     expect(wrapper.text()).toContain("Short Description *");
     expect(wrapper.text()).toContain("Long Description *");
 
-    // Check that price fields don't have asterisks (optional)
     expect(wrapper.text()).not.toContain("Denom Price Min Amount *");
     expect(wrapper.text()).not.toContain("Denom Price Max Amount *");
   });
@@ -63,7 +61,7 @@ describe("ProductForm", () => {
       'input[type="number"][placeholder="Enter gvtId"]'
     );
     const productUrlInput = wrapper.find(
-      'input[type="url"][placeholder="Enter product URL"]'
+      'input[type="text"][placeholder="Enter product URL"]'
     );
     const shortDescTextarea = wrapper.find(
       'textarea[placeholder="Enter short description"]'
@@ -82,7 +80,6 @@ describe("ProductForm", () => {
       mockSingleProduct.shortDescription
     );
 
-    // Test input changes
     await nameInput.setValue("Updated Product Name");
     await gvtIdInput.setValue("2001");
     await productUrlInput.setValue("https://updated.com");
@@ -102,7 +99,7 @@ describe("ProductForm", () => {
       props: { product: mockProductForCreation, mode: "create" },
     });
 
-    // Check that form fields exist (placeholders are in attributes, not text)
+    // Check that form fields exist and have correct placeholders
     const nameInput = createWrapper.find(
       'input[placeholder="Enter product name"]'
     );
@@ -112,12 +109,10 @@ describe("ProductForm", () => {
     expect(nameInput.exists()).toBe(true);
     expect(titleInput.exists()).toBe(true);
 
-    // Test edit mode
     const editWrapper = mount(ProductForm, {
       props: { product: mockSingleProduct, mode: "edit" },
     });
 
-    // Check that form is populated with the product data
     const editNameInput = editWrapper.find(
       'input[placeholder="Enter product name"]'
     );
@@ -141,7 +136,6 @@ describe("ProductForm", () => {
       'input[type="text"][placeholder="Enter product name"]'
     );
 
-    // Test debounced emit
     await nameInput.setValue("New Product Name");
     expect(wrapper.emitted("update:product")).toBeFalsy(); // Should not emit immediately
 
@@ -213,9 +207,9 @@ describe("ProductForm", () => {
   it("handles edge cases and error states gracefully", async () => {
     const invalidProduct = {
       ...mockSingleProduct,
-      name: "", // Invalid
-      gvtId: 0, // Invalid
-      productUrl: "invalid-url", // Invalid
+      name: "",
+      gvtId: 0,
+      orderUrl: "invalid-url", // Invalid
     };
 
     const wrapper = mount(ProductForm, {
@@ -229,13 +223,13 @@ describe("ProductForm", () => {
     const gvtIdInput = wrapper.find(
       'input[type="number"][placeholder="Enter gvtId"]'
     );
-    const urlInput = wrapper.find(
-      'input[type="url"][placeholder="Enter product URL"]'
+    const orderUrlInput = wrapper.find(
+      'input[type="url"][placeholder="Enter order URL"]'
     );
 
     await nameInput.trigger("blur");
     await gvtIdInput.trigger("blur");
-    await urlInput.trigger("blur");
+    await orderUrlInput.trigger("blur");
     vi.advanceTimersByTime(300);
 
     // Should show multiple errors

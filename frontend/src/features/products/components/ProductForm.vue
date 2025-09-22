@@ -223,7 +223,7 @@ function validateField(field: string) {
           </label>
           <input
             v-model="form.productUrl"
-            type="url"
+            type="text"
             placeholder="Enter product URL"
             :class="{
               'invalid-form-field': errors.productUrl && touched.productUrl,

@@ -1,7 +1,8 @@
 import { Product } from "../types/core";
 import { ProductRepository } from "../repository/products-repository";
-import { Failure, HttpResult, Success } from "../types/http";
-import { PaginationParams, PaginatedResponse } from "../types/http";
+import { Failure, HttpResult, Success } from "../types/core";
+import { PaginatedResponse } from "../types/core";
+import { PaginationParams } from "../http/schemas/core";
 
 interface IProductService {
   getAllProducts(): Product[];

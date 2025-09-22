@@ -1,20 +1,4 @@
-import { z } from "zod";
-
-export type HttpResult<T> = success<T> | failure;
-
-type success<T> = T;
-
-type failure = {
-  error: string;
-  status: number;
-};
-
-export const Success = <T>(data: T): success<T> => data;
-
-export const Failure = (error: string, status: number): failure => ({
-  error,
-  status: status,
-});
+import z from "zod";
 
 export const paginationParamsSchema = z.object({
   sortBy: z
@@ -43,20 +27,9 @@ export const paginationParamsSchema = z.object({
     ),
 });
 
-// Schema for validating URL path parameters (like :id)
 export const idParamSchema = z
   .string()
   .transform((val) => parseInt(val, 10))
   .pipe(z.number().int().min(1, "ID must be a positive integer"));
 
 export type PaginationParams = z.infer<typeof paginationParamsSchema>;
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-  hasNext: boolean;
-  hasPrev: boolean;
-}

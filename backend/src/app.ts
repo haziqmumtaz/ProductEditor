@@ -1,6 +1,6 @@
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
-import productsRouter from "./http/products";
+import routers from "./http";
 import cors from "@koa/cors";
 import { requestLogger } from "./middlewares/logging";
 import { errorHandler } from "./middlewares/errorHandler";
@@ -24,7 +24,9 @@ app.use(async (ctx, next) => {
   await next();
 });
 
-app.use(productsRouter.routes());
-app.use(productsRouter.allowedMethods());
+routers.forEach((router) => {
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+});
 
 export default app;

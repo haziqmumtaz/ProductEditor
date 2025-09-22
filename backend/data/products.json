@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": 1462,
+      "name": "test no denom",
+      "gvtId": 1,
+      "productTagline": "fsadhioj",
+      "shortDescription": "dsad",
+      "longDescription": "fsad",
+      "logoLocation": "http://test.com",
+      "productUrl": "sadibahs",
+      "voucherTypeName": "oidhfajn",
+      "orderUrl": "http://test.com",
+      "productTitle": "test no denom",
+      "__typename": "ProductInfo"
+    },
+    {
+      "id": 2443,
+      "name": "test2",
+      "gvtId": 2,
+      "productTagline": "test2",
+      "shortDescription": "test2",
+      "longDescription": "test2",
+      "logoLocation": "http://test",
+      "productUrl": "test2",
+      "voucherTypeName": "trest2",
+      "orderUrl": "test2",
+      "productTitle": "test2",
+      "variableDenomPriceMinAmount": "0.2",
+      "variableDenomPriceMaxAmount": "0.2",
+      "__typename": "ProductInfo"
+    },
+    {
       "id": 9729,
       "name": "test",
       "gvtId": 1,

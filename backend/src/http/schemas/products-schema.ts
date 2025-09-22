@@ -11,7 +11,7 @@ export const putProductSchema = z
     logoLocation: z.string().url(),
     productUrl: z.string(),
     voucherTypeName: z.string(),
-    orderUrl: z.string(),
+    orderUrl: z.url(),
     productTitle: z.string(),
     variableDenomPriceMinAmount: z.string().optional(),
     variableDenomPriceMaxAmount: z.string().optional(),

@@ -1,5 +1,6 @@
-const BASE =
-  import.meta.env.VITE_API_BASE ?? "http://example.com/URL_IS_MISSING";
+import config from "../config";
+
+const BASE_URL = config.BaseApiUrl;
 const DEFAULT_TIMEOUT = 5_000;
 
 function toQuery(params?: Record<string, unknown>) {
@@ -24,7 +25,7 @@ async function request<T>(
   );
 
   try {
-    const res = await fetch(`${BASE}${path}`, {
+    const res = await fetch(`${BASE_URL}${path}`, {
       headers: {
         Accept: "application/json",
         ...(opts.body ? { "Content-Type": "application/json" } : {}),

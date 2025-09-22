@@ -15,7 +15,6 @@ describe("BaseModal", () => {
 
     await wrapper.vm.$nextTick();
 
-    // Check if modal content exists in document body
     const modalContent = document.querySelector('[class*="fixed inset-0"]');
     expect(modalContent).toBeTruthy();
   });

@@ -1,18 +1,20 @@
 {
-  "name": "backend",
+  "name": "@codaproducteditor/backend",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "tsx --watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
-    "test": "vitest"
+    "test": "vitest",
+    "test:bg": "vitest run"
   },
   "dependencies": {
     "@koa/cors": "^5.0.0",
+    "@koa/router": "^14.0.0",
+    "dotenv": "^17.2.2",
     "koa": "^3.0.1",
     "koa-bodyparser": "^4.4.1",
-    "koa-router": "^14.0.0",
     "zod": "^4.1.9"
   },
   "devDependencies": {
