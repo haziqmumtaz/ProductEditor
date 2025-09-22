@@ -19,7 +19,7 @@ export const productSchema = z
       .optional()
       .refine(
         (val) => !val || z.url().safeParse(val).success,
-        "Must be a valid URL"
+        "Must be a valid URL i.e https://example.com"
       ),
     productUrl: z.string().min(1, "Product URL must be present"),
     voucherTypeName: z.string().min(1, "Voucher type name must be present"),

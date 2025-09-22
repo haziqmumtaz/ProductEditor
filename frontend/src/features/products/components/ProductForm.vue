@@ -5,6 +5,7 @@ import {
   updateProductSchema,
 } from "../api/schemas/productSchema";
 import type { Product } from "../types";
+import { splitCamelCaseToTitle } from "../../../utils/string";
 
 interface Props {
   product: Product | Omit<Product, "id">;
@@ -44,6 +45,7 @@ watch(
   { deep: true }
 );
 
+
 function validateForm() {
   try {
     const schema =
@@ -57,7 +59,9 @@ function validateForm() {
       const newErrors: Record<string, string> = {};
       JSON.parse(error).forEach((err: any) => {
         const field = err.path[0];
-        newErrors[field] = err.message;
+        newErrors[field] = err.message.includes("received undefined")
+          ? splitCamelCaseToTitle(field) + " must be present"
+          : err.message;
       });
       errors.value = newErrors;
     }
@@ -153,7 +157,10 @@ function validateField(field: string) {
             <span class="text-red-500">*</span>
           </label>
           <input
-            v-model.number="form.gvtId"
+            v-model="form.gvtId"
+            default="0"
+            min="0"
+            step="1"
             type="number"
             placeholder="Enter gvtId"
             :class="{ 'invalid-form-field': errors.gvtId && touched.gvtId }"
@@ -264,8 +271,9 @@ function validateField(field: string) {
           </label>
           <input
             v-model="form.variableDenomPriceMinAmount"
-            type="number"
+            min="0"
             step="0.1"
+            type="number"
             placeholder="Enter minimum amount"
             :class="{
               'invalid-form-field':
@@ -293,6 +301,7 @@ function validateField(field: string) {
           <input
             v-model="form.variableDenomPriceMaxAmount"
             type="number"
+            min="0"
             step="0.1"
             placeholder="Enter maximum amount"
             :class="{
