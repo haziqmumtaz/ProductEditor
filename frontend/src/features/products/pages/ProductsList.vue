@@ -33,7 +33,11 @@ const {
 } = useGetProducts();
 
 // Products delete request hook
-const { execute: deleteProduct } = useDeleteProduct();
+const {
+  execute: deleteProduct,
+  error: deleteProductError,
+  loading: deleteProductLoading,
+} = useDeleteProduct();
 
 // Router for navigation
 const router = useRouter();
@@ -89,6 +93,7 @@ async function confirmDelete() {
   if (productToDelete.value) {
     const productIdToDelete = productToDelete.value.id;
     await deleteProduct(productIdToDelete);
+
     const filteredProducts = allProducts.value.filter(
       (p) => p.id !== productIdToDelete
     );
@@ -148,6 +153,12 @@ watch(loadMoreTrigger, (newTrigger) => {
     nextTick(() => {
       setupIntersectionObserver();
     });
+  }
+});
+
+watch(deleteProductError, () => {
+  if (deleteProductError.value) {
+    alert("Product Could not be deleted, please try again later");
   }
 });
 </script>
